@@ -12,7 +12,7 @@ import {
     REGISTER,
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
- import companySlice from "./companySlice";
+
 import clubSlice from "./clubSlice";
 import applicationSlice from "./applicationSlice";
 import { Club } from "lucide-react";
@@ -26,8 +26,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
     auth:authSlice,
     job:jobSlice,
-    // club:clubSlice,
-    // company:companySlice,
+ 
     club:clubSlice,
     application:applicationSlice
 })

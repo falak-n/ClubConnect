@@ -31,7 +31,7 @@ const Profile = () => {
                         </Avatar> */}
                             <h1 className='font-medium text-xl'>{user?.fullname}</h1>
                             {/* <p>{user?.profile?.bio}</p> */}
-                            <p>{user?.profile?.branch}</p>
+                            {/* <p>{user?.profile?.members}</p> */}
                         </div>
                     </div>
                     <Button onClick={() => setOpen(true)} className="text-right" variant="outline"><Pen /></Button>
@@ -47,6 +47,14 @@ const Profile = () => {
                     </div>
                 </div>
                 <div className='my-5'>
+                    <h1>Members of</h1>
+                    <div className='flex items-center gap-1'>
+                        {
+                            user?.profile?.members.length !== 0 ? user?.profile?.members.map((item, index) => <Badge key={index}>{item}</Badge>) : <span>NA</span>
+                        }
+                    </div>
+                </div>
+                <div className='my-5'>
                     <h1>Skills</h1>
                     <div className='flex items-center gap-1'>
                         {
@@ -54,8 +62,30 @@ const Profile = () => {
                         }
                     </div>
                 </div>
+                    {/* <div className='my-5'>
+                        <h1>Members of</h1>
+                        <div className='flex items-center gap-1'>
+                            {
+                                user?.profile?.members?.length > 0 
+                                    ? user.profile.members.map((item, index) => <Badge key={index}>{item}</Badge>) 
+                                    : <span>NA</span>
+                            }
+                        </div>
+                    </div>
+
+                    <div className='my-5'>
+                        <h1>Skills</h1>
+                        <div className='flex items-center gap-1'>
+                            {
+                                user?.profile?.skills?.length > 0 
+                                    ? user.profile.skills.map((item, index) => <Badge key={index}>{item}</Badge>) 
+                                    : <span>NA</span>
+                            }
+                        </div>
+                    </div> */}
+
                 <div className='grid w-full max-w-sm items-center gap-1.5'>
-                    <Label className="text-md font-bold">Resume</Label>
+                    <Label className="text-md font-bold">Past Work</Label>
                     {
                         isResume ? <a target='blank' href={user?.profile?.resume} className='text-blue-500 w-full hover:underline cursor-pointer'>{user?.profile?.resumeOriginalName}</a> : <span>NA</span>
                     }

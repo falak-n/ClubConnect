@@ -28,6 +28,7 @@ const jobSlice = createSlice({
             state.allAppliedJobs = action.payload;
         },
         setSearchedQuery:(state,action) => {
+            console.log("Dispatched Query to Redux:", action.payload);
             state.searchedQuery = action.payload;
         }
     }

@@ -91,7 +91,7 @@ export const login = async (req, res) => {
             email: user.email,
             phoneNumber: user.phoneNumber,
             role: user.role,
-            profile: user.profile
+             profile: user.profile
         }
 
         return res.status(200).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpsOnly: true, sameSite: 'strict' }).json({
@@ -115,14 +115,17 @@ export const logout = async (req, res) => {
 }
 export const updateProfile = async (req, res) => {
     try {
-        const { fullname,reg, email, phoneNumber, branch, skills } = req.body;
+        const { fullname,reg, email, phoneNumber, members, skills } = req.body;
         
         // const file = req.file;
         // // // cloudinary ayega idhar
         // const fileUri = getDataUri(file);
         // const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
         
-
+        let membersArray;
+        if(members){
+            membersArray = members.split(",");
+        }
 
         let skillsArray;
         if(skills){
@@ -143,7 +146,7 @@ export const updateProfile = async (req, res) => {
         if(reg) user.reg=reg
         if(email) user.email = email
         if(phoneNumber)  user.phoneNumber = phoneNumber
-        if(branch) user.profile.branch = branch
+        if(members) user.profile.members =membersArray
         if(skills) user.profile.skills = skillsArray
       
         // resume comes later here...

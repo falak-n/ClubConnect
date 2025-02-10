@@ -9,12 +9,18 @@ const clubSchema = new mongoose.Schema({
     description:{
         type:String, 
     },
-    website:{
-        type:String 
-    },
     clubl:{
+       type:String,
+    },
+    contact:{
         type:String 
     },
+    coordinator:{
+        type:String 
+    },
+    // clubl:{
+    //     type:String 
+    // },
     // logo:{
     //     type:String 
     // },

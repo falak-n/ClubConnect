@@ -68,32 +68,76 @@ export const getClubById = async (req, res) => {
         console.log(error);
     }
 }
+// export const updateClub = async (req, res) => {
+//     try {
+//         const { name, description, website, clubl } = req.body;
+//     //    console.log( name, description);
+//         const file = req.file;
+//         // idhar cloudinary ayega
+//         const fileUri = getDataUri(file);
+//         const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+//         const logo = cloudResponse.secure_url;
+    
+//         const updateData = { name, description, website, clubl};
+
+//         const club = await Club.findByIdAndUpdate(req.params.id, updateData, { new: true });
+
+//         if (!club) {
+//             return res.status(404).json({
+//                 message: "Club not found.",
+//                 success: false
+//             })
+//         }
+//         return res.status(200).json({
+//             message:"Club information updated.",
+//             success:true
+//         })
+
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
+
 export const updateClub = async (req, res) => {
     try {
-        const { name, description, website, clubl } = req.body;
- 
-        const file = req.file;
-        // idhar cloudinary ayega
-        const fileUri = getDataUri(file);
-        const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
-        const logo = cloudResponse.secure_url;
-    
-        const updateData = { name, description, website, clubl};
+        // const { name, description, website, clubl } = req.body;
+        const { name, description ,clubl,contact,coordinator} = req.body;
+        // const file = req.file;
 
-        const club = await Club.findByIdAndUpdate(req.params.id, updateData, { new: true });
+        // Validate file
+        // if (!file) {
+        //     return res.status(400).json({ success: false, message: "File is required" });
+        // }
 
-        if (!club) {
-            return res.status(404).json({
-                message: "Club not found.",
-                success: false
-            })
+        // // Upload to Cloudinary
+        // let logo;
+        // try {
+        //     const fileUri = getDataUri(file);
+        //     const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+        //     logo = cloudResponse.secure_url;
+        // } catch (uploadError) {
+        //     return res.status(500).json({ success: false, message: "Cloudinary upload failed", error: uploadError.message });
+        // }
+
+        // Check if the club exists
+        const clubExists = await Club.findById(req.params.id);
+        if (!clubExists) {
+            return res.status(404).json({ message: "Club not found.", success: false });
         }
+
+        // Update the club
+        // const updateData = { name, description, website, clubl, logo };
+        const updateData = { name, description,contact,coordinator};
+        const updatedClub = await Club.findByIdAndUpdate(req.params.id, updateData, { new: true });
+
         return res.status(200).json({
-            message:"Club information updated.",
-            success:true
-        })
+            message: "Club information updated.",
+            success: true,
+            data: updatedClub,
+        });
 
     } catch (error) {
-        console.log(error);
+        console.error(error);
+        return res.status(500).json({ success: false, message: "Internal server error", error: error.message });
     }
-}
+};

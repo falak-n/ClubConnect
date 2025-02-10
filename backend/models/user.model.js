@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
         required:true
     },
     profile:{
-        branch:{type:String},
+        members:[{type:String}],
         skills:[{type:String}],
         previous:{type:String}, // URL to resume file
         //resumeOriginalName:{type:String},

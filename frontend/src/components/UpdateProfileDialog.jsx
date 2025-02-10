@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from './ui/dialog'
+import { Dialog, DialogContent,DialogDescription, DialogFooter, DialogHeader, DialogTitle } from './ui/dialog'
 import { Label } from './ui/label'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
@@ -18,7 +18,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
         fullname: user?.fullname || "",
         email: user?.email || "",
         phoneNumber: user?.phoneNumber || "",
-        branch: user?.profile?.branch || "",
+        members: user?.profile?.members?.map(member=>member) || "",
         skills: user?.profile?.skills?.map(skill => skill) || "",
         file: user?.profile?.resume || ""
     });
@@ -39,7 +39,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
         formData.append("fullname", input.fullname);
         formData.append("email", input.email);
         formData.append("phoneNumber", input.phoneNumber);
-        formData.append("branch", input.branch);
+        formData.append("members", input.members);
         formData.append("skills", input.skills);
         if (input.file) {
             formData.append("file", input.file);
@@ -74,6 +74,9 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
                 <DialogContent className="sm:max-w-[425px]" onInteractOutside={() => setOpen(false)}>
                     <DialogHeader>
                         <DialogTitle>Update Profile</DialogTitle>
+                            {/* <DialogDescription>
+                            Make changes to your profile. Click update when you're done.
+                        </DialogDescription> */}
                     </DialogHeader>
                     <form onSubmit={submitHandler}>
                         <div className='grid gap-4 py-4'>
@@ -100,7 +103,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
                                 />
                             </div>
                             <div className='grid grid-cols-4 items-center gap-4'>
-                                <Label htmlFor="number" className="text-right">Number</Label>
+                                <Label htmlFor="number" className="text-right">Phone Number</Label>
                                 <Input
                                     id="number"
                                     name="number"
@@ -110,11 +113,11 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
                                 />
                             </div>
                             <div className='grid grid-cols-4 items-center gap-4'>
-                                <Label htmlFor="bio" className="text-right">Branch</Label>
+                                <Label htmlFor="bio" className="text-right">Member of</Label>
                                 <Input
-                                    id="branch"
-                                    name="branch"
-                                    value={input.bio}
+                                    id="members"
+                                    name="members"
+                                    value={input.members}
                                     onChange={changeEventHandler}
                                     className="col-span-3"
                                 />
@@ -130,7 +133,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
                                 />
                             </div>
                             <div className='grid grid-cols-4 items-center gap-4'>
-                                <Label htmlFor="file" className="text-right">Resume</Label>
+                                <Label htmlFor="file" className="text-right">Past Work</Label>
                                 <Input
                                     id="file"
                                     name="file"

@@ -4,9 +4,21 @@ import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import ClubsTable from './ClubsTable'
 import { useNavigate } from 'react-router-dom'
+import useGetAllClubs from '@/hooks/useGetAllClubs'
+import { useDispatch } from 'react-redux'
+import { setSearchClubByText } from '@/redux/clubSlice'
 
 const Clubs = () => {
+    useGetAllClubs();
+    const [input,setInput]=useState("");
     const navigate=useNavigate();
+    const dispatch = useDispatch();
+
+    
+    useEffect(()=>{
+        dispatch(setSearchClubByText(input));
+    },[input]);
+    
     return (
         <div>
             <Navbar />

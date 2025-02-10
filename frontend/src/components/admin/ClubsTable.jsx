@@ -3,8 +3,24 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import { Avatar, AvatarImage } from '../ui/avatar'
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 import { Edit2, MoreHorizontal } from 'lucide-react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const ClubsTable = () => {
+    const { clubs,searchClubByText } = useSelector(store => store.club);
+    const [filterClub, setFilterClub] = useState(clubs);
+    const navigate=useNavigate();
+
+    useEffect(()=>{
+        const filteredClub = clubs.length >= 0 && clubs.filter((club)=>{
+            if(!searchClubByText){
+                return true
+            };
+            return club?.name?.toLowerCase().includes(searchClubByText.toLowerCase());
+
+        });
+        setFilterClub(filteredClub);
+    },[clubs,searchClubByText])
     return (
         <div>
             <Table>
@@ -18,20 +34,31 @@ const ClubsTable = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    <TableCell>club name</TableCell>
-                    <TableCell>6-7-8990</TableCell>
-                    <TableCell>
-                        <Popover>
-                            <PopoverTrigger><MoreHorizontal></MoreHorizontal></PopoverTrigger>
-                            <PopoverContent className="w-32">
-                                <div className='flex items-center gap-2'>
-                                    <Edit2 className='w-4'/>
-                                     <span>edit</span>
-                                </div>
+                    {
+                        filterClub?.map((club) => (
+                            <tr>
+                                {/* <TableCell>
+                                    <Avatar>
+                                        <AvatarImage src={club.logo}/>
+                                    </Avatar>
+                                </TableCell> */}
+                                <TableCell>{club.name}</TableCell>
+                                <TableCell>{club.createdAt.split("T")[0]}</TableCell>
+                                <TableCell className="text-right cursor-pointer">
+                                    <Popover>
+                                        <PopoverTrigger><MoreHorizontal /></PopoverTrigger>
+                                        <PopoverContent className="w-32">
+                                            <div onClick={()=> navigate(`/admin/clubs/${club._id}`)} className='flex items-center gap-2 w-fit cursor-pointer'>
+                                                <Edit2 className='w-4' />
+                                                <span>Edit</span>
+                                            </div>
+                                        </PopoverContent>
+                                    </Popover>
+                                </TableCell>
+                            </tr>
 
-                            </PopoverContent>
-                        </Popover>
-                    </TableCell>
+                        ))
+                    }
                 </TableBody>
             </Table>
         </div>
