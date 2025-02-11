@@ -10,7 +10,7 @@ const useGetClubById = (clubId) => {
     useEffect(()=>{
         const fetchSingleClub = async () => {
             try {
-                const res = await axios.get(`${CLUB_API_END_POINT}/get/${clubId}`,{withCredentials:true});
+                const res = await axios.get(`https://clubconnect-1.onrender.com/api/v1/club/get/${clubId}`,{withCredentials:true});
                 console.log(res.data.club);
                 if(res.data.success){
                     dispatch(setSingleClub(res.data.club));

@@ -19,7 +19,7 @@ const ClubCreate = () => {
     const dispatch=useDispatch();
     const registerNewClub=async()=>{
         try{
-           const res=await axios.post(`${CLUB_API_END_POINT}/register`,{clubName}, {
+           const res=await axios.post(`https://clubconnect-1.onrender.com/api/v1/club/register`,{clubName}, {
             headers:{
                 'Content-Type':'application/json'
             },

@@ -38,7 +38,7 @@ const useGetAllClubs = () => {
     useEffect(()=>{
         const fetchClubs = async () => {
             try {
-                const res = await axios.get(`${CLUB_API_END_POINT}/get`,{withCredentials:true});
+                const res = await axios.get(`https://clubconnect-1.onrender.com/api/v1/club/get`,{withCredentials:true});
                 console.log('called');
                 if(res.data.success){
                     dispatch(setClubs(res.data.clubs));
