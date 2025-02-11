@@ -95,17 +95,7 @@ const PostJob = () => {
                                 className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
                             />
                         </div>
-                        {/* <div>
-                            <Label>Salary</Label>
-                            <Input
-                                type="text"
-                                name="salary"
-                                value={input.salary}
-                                onChange={changeEventHandler}
-                                className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
-                            />
-                        </div> */}
-                        {/* <div>
+                        <div>
                             <Label>Branch</Label>
                             <Input
                                 type="text"
@@ -114,7 +104,9 @@ const PostJob = () => {
                                 onChange={changeEventHandler}
                                 className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
                             />
-                        </div> */}
+                        </div>
+                        
+                        
                         <div>
                             <Label>Task Type</Label>
                             <Input
@@ -125,16 +117,7 @@ const PostJob = () => {
                                 className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
                             />
                         </div>
-                        {/* <div>
-                            <Label>Experience Level</Label>
-                            <Input
-                                type="text"
-                                name="experience"
-                                value={input.experience}
-                                onChange={changeEventHandler}
-                                className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
-                            />
-                        </div> */}
+                        
                         <div>
                             <Label>No of Postion</Label>
                             <Input
